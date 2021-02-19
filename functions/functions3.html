@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Functions: Task 3</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+
+  <body>
+
+    <section class="preview">
+
+
+
+    </section>
+
+  </body>
+  <script>
+    let names = ['Chris', 'Li Kang', 'Anne', 'Francesca', 'Mustafa', 'Tina', 'Bert', 'Jada']
+    let para = document.createElement('p');
+
+    // Add your code here
+    function random(){
+        // Genera un número aleatorio entre 0 y 1, el cual se multiplica por el tamaño del
+        // array y se redondea al menor. saca un número entero.
+        let number = Math.floor(Math.random * names.length);
+        
+        function chooseName(){
+            // Aqui se utiliza ese número entero que hemos sacado antes para sacar un elemento
+            // random del array.
+            let name = names [number];
+        }
+        chooseName();
+    }
+    random();
+    para.textContent = name;
+    // Don't edit the code below here!
+
+    const section = document.querySelector('section');
+
+    section.appendChild(para);
+  </script>
+
+</html>

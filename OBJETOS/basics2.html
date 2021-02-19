@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Object basics: Task 2</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+
+  <body>
+
+    <section class="preview">
+
+
+
+    </section>
+
+  </body>
+  <script>
+    let bandInfo;
+
+    // Add your code here
+
+    const infoBand = {
+        name: 'Coldplay',
+        nationality: 'English',
+        genre: 'Rock',
+        members: 4,
+        formed: 1996,
+        split: false,
+        albums: [
+            {
+                name: ['Parachutes'],
+                released: [2000]
+            },
+            {
+                name: ['Viva la vida'],
+                released: [2010]
+            }]
+    };
+    bandInfo =  infoBand.name + ' es un grupo ' + infoBand.nationality + ' de musica ' + infoBand.genre + ' que esta constituido por ' + infoBand.members + ' miembros. Se formó en ' + infoBand.formed + ' y su album más famoso fue ' + infoBand.albums[1].name + ' que se lanzó en ' + infoBand.albums[1].released + '.';
+
+    
+
+    
+    
+
+    // Don't edit the code below here!
+
+    const section1 = document.querySelector('section');
+    let para1 = document.createElement('p');
+    para1.textContent = bandInfo;
+    section1.appendChild(para1);
+  </script>
+
+</html>

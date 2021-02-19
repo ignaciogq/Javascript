@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ALQUILER DE COCHES</h1>
+    
+    <p>Introduce el modelo de coche <input type="text" id="modelo"></p>
+    <p>Introduce el precio del alquiler por día <input type="number" id="precioDia"></p>
+    <p>Disponibilidad: <input type="checkbox" id="disponibilidad"></p>
+    <button id="submit">Añadir</button>
+    
+    <div class="modelText"></div>
+     <table id="table">
+         <thead>
+             <tr>
+                 <th>
+                     Modelo
+                 </th>
+                 <th>
+                     Precio por día
+                 </th>
+                 <th>
+                     Disponible
+                 </th>
+                 <th>
+
+                 </th>
+                 <th>
+                     
+                 </th>
+             </tr>
+         </thead>
+         <tbody id="tBody">
+            <!--<tr>
+              <td>Mercedes</td>
+              <td>125</td>
+              <td>Si</td> 
+              <td> <button>Editar</button></td>
+              <td> <button>Alquilar o devolver</button> </td> 
+            </tr> -->
+         </tbody>
+     </table>
+    <script src="alquilercoches.js"></script>
+</body>
+</html>

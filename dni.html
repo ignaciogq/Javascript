@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Calcular letra del DNI</p>
+    <div class="formulario">
+        <label for="numberField">Introduce el número: </label>
+        <input type="number" id="numberField" class="numberField">
+        <input type="submit" value="Calcular" class="calcularLetra">
+    </div>
+    <div class="resultado">
+        <p class="paraLetra"></p>
+    </div>
+
+    <script>
+
+        var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
+        var numero = document.querySelector('.numberfield')
+
+        const paraLetra = document.querySelector('.paraLetra');
+        const calcularLetra = document.querySelector('.calcularLetra');
+
+        calcularLetra.addEventListener('click', calcularDni);
+        
+        function calcularDni(){
+        if (numero > 0 || numero < 99999999) {
+            let letraCalculada = letras[numero % 23];
+            paraLetra.textContent = letraCalculada;
+        }
+        else{
+            
+            paraLetra.textContent = 'número incorrecto';
+        }
+
+
+    }
+        
+            
+    </script>
+
+</body>
+</html>
