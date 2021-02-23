@@ -87,14 +87,14 @@ function onButtonClick(){
         const model = modelTd.textContent;
         modelTd.textContent = '';
         const editModelInput = document.createElement('input');
-        editModelInput.value = modelInput.value;
+        editModelInput.value = model; // modelInput.value;
         modelTd.appendChild(editModelInput);
 
         const priceTd = tr.children[1];
         const dayPrice = priceTd.textContent;
         priceTd.textContent = '';
         const editDayPriceInput = document.createElement('input');
-        editDayPriceInput.value = dayPriceInput.value;
+        editDayPriceInput.value = dayPrice; // dayPriceInput.value;
         priceTd.appendChild(editDayPriceInput);
 
         const availableTd = tr.children[2];
