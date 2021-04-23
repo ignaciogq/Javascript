@@ -148,6 +148,9 @@ let employees = [
 
 */
 
+
+
+
 /* function buildTree(employees) {
 
 	let rootEmployes = [];
@@ -176,7 +179,7 @@ const rootEmployes = buildTree(employees);
 console.log(rootEmployes); */
 
 
-/* function buildTree(employees) {
+function buildTree(employees) {
     let employeeById = [];
     let rootEmployees = [];
 
@@ -202,77 +205,4 @@ console.log(rootEmployes); */
     return rootEmployees;
 }
 
-console.log(buildTree(employees)); */
-
-// POCO BIEN
-/* function indentData() {
-	let indent = '   ';
-	for (let i = 0; i < employees.length; i++) {
-		let currentEmployee = employees[i];
-		if (currentEmployee.ReportsTo == undefined){
-			console.log(`${currentEmployee.FirstName} ${currentEmployee.LastName}`);
-		}
-		else {
-			console.log(`${indent}${currentEmployee.FirstName} ${currentEmployee.LastName}`)
-		}
-	}
-	
-}
-
-console.log(indentData()); */
-
-// MEDIO BIEN
-/* let index = undefined;
-function indentData() {
-	let indent = '   ';
-	for (let i = 0; i < employees.length; i++) {
-		let currentEmployee = employees[i];
-		let currentName = currentEmployee.FirstName + ' ' + currentEmployee.LastName;
-		if (currentEmployee.ReportsTo == undefined){
-			console.log(currentName);
-			index = currentEmployee.EmployeeID;
-		}
-		else if (currentEmployee.ReportsTo === index){
-				console.log(`${indent}${currentEmployee.FirstName} ${currentEmployee.LastName}`);
-		}
-	}
-}
-
-console.log(indentData()); */
-
-
-
-/* let index = undefined;
-function indentData(employees) {
-	let indent = '   ';
-	for (let i = 0; i < employees.length; i++) {
-		let currentEmployee = employees[i];
-		let currentName = currentEmployee.FirstName + ' ' + currentEmployee.LastName;
-		if (currentEmployee.ReportsTo == undefined){
-			console.log(currentName);
-			index = currentEmployee.EmployeeID;
-		}
-	}
-	for (let i = 0; i < employees.length; i++){
-		let currentEmployee = employees[i];
-		let currentName = currentEmployee.FirstName + ' ' + currentEmployee.LastName;
-		if (currentEmployee.ReportsTo === index){
-			let name = indent + currentName;
-			console.log(name);
-		}
-	}
-}
-
-console.log(indentData()); */
-
-indent = '   ';
-function indentData(employees, indent) {
-	for (let employee of employees) {
-		console.log(`${indent}${employee.FirstName}${employee.LastName}`);
-		if (employee.Subordinates) {
-			indentData(employee.Subordinates, indent + '   ')
-		}
-	}
-}
-
-console.log(indentData(employees, indent));
+console.log(buildTree(employees));

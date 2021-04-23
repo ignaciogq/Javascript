@@ -187,3 +187,4 @@ for (let i = 0; i < products.length; i++){
     prod.category = cat;
     cat.products.push(prod);
 }
+

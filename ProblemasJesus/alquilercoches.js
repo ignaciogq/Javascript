@@ -1,13 +1,14 @@
 var modelInput = document.getElementById('modelo');
 var dayPriceInput = document.getElementById('precioDia');
-var carTotalPrice;
 
 var checkBox = document.getElementById('disponibilidad');
-
 let addButton = document.getElementById("submit");
-
 let table = document.getElementById('table');
 let bodyTable = document.getElementById('tBody');
+let resultBox = document.getElementById('modelText');
+let dailyProfit = document.getElementById('dailyProfit');
+
+var profitForDay = 0;
 
 //Cuando se pulsa el boton añadir se ejecuta la función
 function onButtonClick(){
@@ -27,6 +28,9 @@ function onButtonClick(){
     priceCell.innerHTML = dayPriceInput.value + " €";
     row.appendChild(priceCell);
 
+    var availabilityCell = document.createElement('td');
+    row.appendChild(availabilityCell);
+
     let editButton = document.createElement('button');
     editButton.innerHTML = "Editar";
 
@@ -36,46 +40,50 @@ function onButtonClick(){
     let giveBackButton = document.createElement('button');
     giveBackButton.innerHTML = "Devolver";
 
-// Si la checkbox esta chekeada se añade un "si" en disponibilidad, un boton editar y un
-// boton alquilar, si no lo está, se añade un "no" y los botones editar y devolver
+    let calculatePara = document.createElement('p');
+    calculatePara.innerHTML = "Introduce el número de días que has utilizado el vehículo";
+
+    let rentalDaysInput = document.createElement('input');
+    rentalDaysInput.setAttribute('type', 'number');
+
+    let calculateButton = document.createElement('button');
+    calculateButton.innerHTML = "Calcular";
+
+    var buttonsCell = document.createElement('td');
+    buttonsCell.appendChild(editButton);
+    buttonsCell.appendChild(rentButton);
+    buttonsCell.appendChild(giveBackButton);
+    buttonsCell.appendChild(calculatePara)
+    buttonsCell.appendChild(rentalDaysInput);
+    buttonsCell.appendChild(calculateButton);
+    row.appendChild(buttonsCell);
+
+    calculatePara.style.display = 'none';
+    rentalDaysInput.style.display = 'none';
+    calculateButton.style.display = 'none';
+
+    // Si la checkbox esta chekeada se añade un "si" en disponibilidad, un boton editar y un
+    // boton alquilar, si no lo está, se añade un "no" y los botones editar y devolver
 
     if(checkBox.checked){
 
-        var availabilityCell = document.createElement('td');
         availabilityCell.innerHTML = ("Si");
-        row.appendChild(availabilityCell);
-
-        var editButtonCell = document.createElement('td');
-        editButtonCell.appendChild(editButton);
-        row.appendChild(editButtonCell);
-
-        var rentButtonCell = document.createElement('td');
-        rentButtonCell.appendChild(rentButton);
-        row.appendChild(rentButtonCell);
+        giveBackButton.style.display = 'none';
 
     } else {
 
-        var availabilityCell = document.createElement('td');
         availabilityCell.innerHTML = ("No");
-        row.appendChild(availabilityCell);
+        rentButton.style.display = 'none';
 
-        var editButtonCell = document.createElement('td');
-        editButtonCell.appendChild(editButton);
-        row.appendChild(editButtonCell);
-
-        var giveBackButtonCell = document.createElement('td');
-        giveBackButtonCell.appendChild(giveBackButton);
-        row.appendChild(giveBackButtonCell);
-         
     }
 
 
     editButton.addEventListener('click', editCar);
     rentButton.addEventListener('click', rentCar);
     giveBackButton.addEventListener('click', giveBackCar);
-//Cuando se pulsa el boton editar, tienen que aparecer dos cajas de texto y una checkbox
-// con los valores predeterminados, para editar de esta manera solo 
-// el campo que se desee cambiar
+    //Cuando se pulsa el boton editar, tienen que aparecer dos cajas de texto y una checkbox
+    // con los valores predeterminados, para editar de esta manera solo 
+    // el campo que se desee cambiar
     function editCar() {
         editButton.style.display = 'none';
         rentButton.style.display = 'none';
@@ -115,9 +123,7 @@ function onButtonClick(){
         const saveButton = document.createElement('button');
         saveButton.innerHTML = 'Guardar';
         
-        let saveButtonCell = document.createElement('td');
-        saveButtonCell.appendChild(saveButton);
-        row.appendChild(saveButtonCell);
+        buttonsCell.appendChild(saveButton);
 
         saveButton.addEventListener('click',saveChanges);
 
@@ -128,7 +134,6 @@ function onButtonClick(){
 
             editButton.style.display = 'inline';
             
-
             modelTd.textContent = editModelInput.value;
             modelInput.value = editModelInput.value;
 
@@ -156,25 +161,51 @@ function onButtonClick(){
 // de alquilar por el boton devolver y cambiar la disponibilidad de 'si' a 'no'.
     function rentCar() {
         rentButton.style.display = 'none';
+        giveBackButton.style.display = 'inline';
 
-        const tr = this.parentElement.parentElement;
-        
-        let giveBackButton = document.createElement('button');
-        giveBackButton.innerHTML = "Devolver";
-
-        var giveBackButtonCell = document.createElement('td');
-        giveBackButtonCell.appendChild(giveBackButton);
-        row.appendChild(giveBackButtonCell);
-
-        const availableTd = tr.children[2];
-        let available = availableTd.textContent;
-        available = "No";
+        availabilityCell.innerHTML = ("No");
 
         return;
     }
 
     function giveBackCar() {
-        
+        editButton.style.display = 'none';
+        giveBackButton.style.display = 'none';
+
+        calculatePara.style.display = 'inline';
+        rentalDaysInput.style.display = 'inline';
+        calculateButton.style.display = 'inline';
+
+        calculateButton.addEventListener('click', calculatePrice);
+
+        function calculatePrice() {
+
+            const tr = this.parentElement.parentElement;
+            const modelTd = tr.children[0];
+            const priceTd = tr.children[1].textContent;
+
+            let daysCarRent = rentalDaysInput.value;
+            let totalCarPrice = parseFloat(daysCarRent) * parseFloat(priceTd);
+
+            let priceCarPara = document.createElement('p');
+            resultBox.appendChild(priceCarPara);
+            priceCarPara.textContent = `El precio por el alquiler del vehículo modelo ${modelTd.textContent} es de ${totalCarPrice} €.`;
+
+            editButton.style.display = 'inline';
+            rentButton.style.display = 'inline';
+    
+            calculatePara.style.display = 'none';
+            rentalDaysInput.style.display = 'none';
+            calculateButton.style.display = 'none';
+
+            availabilityCell.innerHTML = ("Si");
+
+            profitForDay += totalCarPrice;
+            dailyProfit.textContent = `Total ganado hoy: ${profitForDay}€ `;
+
+            return;
+        }
+        return;
     }
 }
 
