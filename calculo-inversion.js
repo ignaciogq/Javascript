@@ -16,4 +16,4 @@ function calcularInversion (inversionInicial, inversionMensual, años) {
     }
 }
  
-calcularInversion(50000, 400, 20);
+calcularInversion(50000, 416.66, 30);
